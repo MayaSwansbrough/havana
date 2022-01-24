@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Havana</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Quicksand&display=swap" rel="stylesheet"><link rel="stylesheet" href="./style.css">
+
+</head>
+<header>
+  <h1>Havana</h1>
+  <nav>
+    <a>Home</a>
+    <a>Your Ads</a>
+    <a>Search</a>
+    <a>Watchlist</a>
+    <a>Account</a>
+    <a>Messages</a>
+  </nav>
+  <div id="watchlistCounter">
+    Watchlist: <span id="watchlistNum">0 horses</span>
+  </div>
+</header>
+
+<body>
+  <div class="middle">
+    <div class="search">
+      <div id="searchBar">
+        <h3>Search</h3>
+        <p>
+        <input type="search" style="width:300px" id="searchInput" onkeyup="searchBy()" placeholder="Search by name, breed, discipline, or zipcode"><br>
+        <p><div class="searchButtons"><button id="search">Search</button> <button id="reset">Reset</button></p></div><br>
+      Hide sold? <input type="checkbox"><br>
+      Hide international? <input type="checkbox">
+    </div>
+    <div id="searchFilter">
+      <h4>Filters</h4>
+      <label for="breed">Breed:</label>
+      <select name="breed" class="searchFilter" id="breed" onchange="filterBy()">
+        <option value="null"></option>
+        <option value="belgianWb">Belgian Warmblood</option>
+        <option value="canadianSp">Canadian Sporthorse</option>
+        <option value="dutchWb">Dutch Warmblood</option>
+        <option value="selleFran">Selle Francais</option>
+        <option value="thoroughbred">Thoroughbred</option>
+     </select><br>
+    
+    <label>Age:</label>
+    <input type="text" name="minAge" class="searchFilter" id="ageMin" style="width:25px" placeholder="Min"> to <input type="text" name="maxAge" class="searchFilter" id="ageMax" style="width:25px" placeholder="Max"><br>
+    
+    <label for="discpline">Discipline:</label>
+    <select name="discipline" class="searchFilter" id="discipline">
+      <option value="null"></option>
+      <option value="equitation">Equitation</option>
+      <option value="hunter">Hunter</option>
+      <option value="jumper">Jumper</option>
+      <option value="model">Model</option>
+      <option value="prospect">Prospect/In Utero</option>
+    </select><br>
+    
+    <label for="jumping">Jumping experience:</label>
+    <select name="jumping" class="searchFilter" id="jumpExperience">
+      <option value="null"></option>
+      <option value="unstarted">Unstarted</option>
+      <option value="cross">Crossrails / 1' - 2'</option>
+      <option value="twoFt">2'3" - 2'9" / .7m - .8m</option>
+      <option value="threeFt">3' - 3'3" / .9m - 1m</option>
+      <option value="threeFtSix">3'6" - 3'9" / 1.10m - 1.20m</option>
+      <option value="fourFt">4'+ / 1.30m+</option>
+    </select><br>
+    
+    <label for="suitable">Suitable for:</label>
+    <select name="suitable" class="searchFilter" id="suitableFor">
+      <option value="null"></option>
+      <option value="unstarted">Professional</option>
+      <option value="novice">Novice Jr/Am</option>
+      <option value="intermediate">Intermediate Jr/Am</option>
+      <option value="advanced">Advanced Jr/Am</option>
+    </select><br>
+    
+    <label>Price range:</label>
+    <input type="text" name="minPrice" class="searchFilter" id="minPrice" style="width:100px" placeholder="Minimum Price"> to <input type="text" name="maxPrice" class="searchFilter" id="maxPrice" style="width:100px" placeholder="Maximum Price"><br>
+    
+    <label>Distance:</label>
+    <select name="distance" class="searchFilter" id="distance">
+      <option value="null"></option>
+      <option value="ten">10mi / 15km</option>
+      <option value="twentyFive">25mi / 40km</option>
+      <option value="fifty">50mi / 80km</option>
+      <option value="hundred">100mi / 160km</option>
+      <option value="twoHundredFifty">250mi+ / 400km+</option>
+    </select> from <input type="text" name="zipcode" class="searchFilter" id="zipcode" style="width:145px" placeholder="Zipcode / Postal Code"><br>
+    
+    <label>Seller:</label>
+    <input type="text" name="seller" class="searchFilter" id="seller" placeholder="Contact or Barn Name"><br>
+    
+    </p>
+    </div>
+  </div>
+
+    <div class="watchlist">
+    <div class="watchlistNav">
+      <div id="titleWatchlist"><h3>Watchlist</h3></div>
+      <div id="toWatchlist"><a>Go to watchlist</a></div>
+      <div id="clearWatchlist"><a>Clear watchlist</a></div>
+    </div><br>
+    <ul class="watchlistItems">
+      <li id="watchlistItemOne"><span id="watchlistItemOneImg">
+      <img src="https://drive.google.com/uc?export=view&id=1Acieqf3fgU-6eLjatKUWzUZslpEPuhYO" alt="Kahlua"></span><span id="watchlistItemOneInfo">(Name) - (Age) year old (Breed) (Discipline) - (Price)</span>
+    </li>
+      <li id="watchlistItemTwo">
+        <span id="watchlistItemTwoImg"><img src="https://drive.google.com/uc?export=view&id=1Acieqf3fgU-6eLjatKUWzUZslpEPuhYO" alt="Kahlua"></span><span id="watchlistItemTwoInfo">(Name) - (Age) year old (Breed) (Discipline) - (Price)</span>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="bottom"><center>Welcome! Please hover over each horse to see more information.</center>  
+  <div class="horses" id="horses">
+    <div id="kahlua" onMouseover="document.getElementById('kahluaCard').style.display = 'block'" onMouseout="document.getElementById('kahluaCard').style.display = 'none'";>
+      <img src="https://drive.google.com/uc?export=view&id=1Acieqf3fgU-6eLjatKUWzUZslpEPuhYO" alt="Kahlua" id="kahluaPic"><br>
+      <b>Kahlua</b> <span id= "kahluaLink" class="watchlistLink"><a>+ add to watchlist</a></span>
+        <div id="kahluaCard" class="cards" onMouseover="document.getElementById('kahluaCard').style.display = 'block'" onMouseout="document.getElementById('kahluaCard').style.display = 'none'";>
+      <b>Name:</b> Kahlua<br>
+      <b>Breed:</b> Selle Francais<br>
+      <b>Age:</b> 7<br>
+      <b>Discipline:</b> Hunter<br>
+      <b>Jumping experience:</b> Crossrails<br>
+      <b>Suitable for:</b> Professional<br>
+      <b>Price:</b> $5,000<br>
+      <b>Location:</b> Buffalo, NY<br>
+      <b>Seller:</b> Horse Sales Inc. <a>Message</a><br>
+      <b>Phone number:</b> <span id="phone">(888) 888-8888</span> <span id="premium"><a>Upgrade to Premium!</a></span>
+  </div>
+      </div>
+    
+    <div id="coconut" onMouseover="document.getElementById('coconutCard').style.display = 'block'" onMouseout="document.getElementById('coconutCard').style.display = 'none'";>
+      <img src="https://drive.google.com/uc?export=view&id=1znfvojkFONGrSbkalQ3fVgiOZoePNspW" alt="Coconut Water" id="coconutPic"><br>
+      <b>Coconut Water</b> <span id="coconutLink" class="watchlistLink"><a>+ add to watchlist</a></span>
+      <div id="coconutCard" class="cards" onMouseover="document.getElementById('coconutCard').style.display = 'block'" onMouseout="document.getElementById('coconutCard').style.display = 'none'";>
+        <b>Name:</b> Coconut Water "Coco"<br>
+        <b>Breed:</b> Belgian Warmblood<br>
+        <b>Age:</b> 12<br>
+        <b>Discipline:</b> Equitation<br>
+        <b>Jumping experience:</b> 3'6" - 3'9"<br>
+        <b>Suitable for:</b> Advanced Jr/Am<br>
+        <b>Price:</b> $18,000<br>
+        <b>Location:</b> Thermal, CA<br>
+        <b>Seller:</b> West Coast Sales <a>Message</a><br>
+        <b>Phone number:</b> <span id="phone">(888) 888-8888</span> <span id="premium"><a>Upgrade to Premium!</a></span>
+      </div>
+    </div>
+    
+    <div id="bart" onMouseover="document.getElementById('bartCard').style.display = 'block'" onMouseout="document.getElementById('bartCard').style.display = 'none'";>
+      <img src="https://drive.google.com/uc?export=view&id=1vjd7_BSxAFtyTIgvl-2T78XncH9-w7r0" alt="Batholomew" id="bartPic"><br>
+      <b>Bartholomew</b> <span id="bartLink" class="watchlistLink"><a>+ add to watchlist</a></span>
+        <div id="bartCard" class="cards" onMouseover="document.getElementById('bartCard').style.display = 'block'" onMouseout="document.getElementById('bartCard').style.display = 'none'";>
+        <b>Name:</b> Bartholomew "Bart"<br>
+        <b>Breed:</b> Canadian Sporthorse<br>
+        <b>Age:</b> 10<br>
+        <b>Discipline:</b> Jumper<br>
+        <b>Jumping experience:</b> 1m<br>
+        <b>Suitable for:</b> Novice Jr/Am, Intermediate Jr/Am<br>
+        <b>Price:</b> $7,500<br>
+        <b>Location:</b> Toronto, ON<br>
+        <b>Seller:</b> Canadian Equine Sales <a>Message</a><br>
+        <b>Phone number:</b> <span id="phone">(888) 888-8888</span> <span id="premium"><a>Upgrade to Premium!</a></span>
+      </div>
+    </div>
+    
+    <div id="saffron" onMouseover="document.getElementById('saffronCard').style.display = 'block'" onMouseout="document.getElementById('saffronCard').style.display = 'none'";>
+      <img src="https://drive.google.com/uc?export=view&id=1uZk-vyZH9iY44n8Lmxhe1nVN72iw35g6" alt="Zafferano" id="saffronPic"><br>
+      <b>Zafferano</b> <span id="saffronLink" class="watchlistLink"><a>+ add to watchlist</a></span>
+         <div id="saffronCard" class="cards" onMouseover="document.getElementById('saffronCard').style.display = 'block'" onMouseout="document.getElementById('saffronCard').style.display = 'none'";>
+        <b>Name:</b> Zafferano "Saffron"<br>
+        <b>Breed:</b> Thoroughbred<br>
+        <b>Age:</b> 2<br>
+        <b>Discipline:</b> Prospect<br>
+        <b>Jumping experience:</b> Unstarted<br>
+        <b>Suitable for:</b> Professional, Advanced Jr/Am<br>
+        <b>Price:</b> $5,000<br>
+        <b>Location:</b> Charlottesville, VA<br>
+        <b>Seller:</b> Maya S. <a>Message</a><br>
+        <b>Phone number:</b> <span id="phone">(888) 888-8888</span> <span id="premium"><a>Upgrade to Premium!</a></span>
+      </div>
+    </div>
+    
+    <div id="tara" onMouseover="document.getElementById('taraCard').style.display = 'block'" onMouseout="document.getElementById('taraCard').style.display = 'none'";>
+      <img src="https://drive.google.com/uc?export=view&id=19DIIdFlTdB9eNw_0qsf0ek7LvL3rjcIs" alt="Tara Justly" id="taraPic"><br>
+      <b>Tara Justly</b> <span id="taraLink" class="watchlistLink"><a>+ add to watchlist</a></span>
+      <div id="taraCard" class="cards" onMouseover="document.getElementById('taraCard').style.display = 'block'" onMouseout="document.getElementById('taraCard').style.display = 'none'";>
+        <b>Name:</b> Tara Justly "Tara"<br>
+        <b>Breed:</b> Dutch Warmblood<br>
+        <b>Age:</b> 15<br>
+        <b>Discipline:</b> Jumper<br>
+        <b>Jumping experience:</b> 1.30m - 1.40m<br>
+        <b>Suitable for:</b> Advanced Jr/Am<br>
+        <b>Price:</b> $40,000<br>
+        <b>Location:</b> Wellington, FL<br>
+        <b>Seller:</b> Wellington Show Stables <a>Message</a><br>
+        Phone number: <span id="phone">(888) 888-8888</span> <span id="premium"><a>Upgrade to Premium!</a></span>
+      </div>
+    </div>
+    
+    <div id="orphy" onMouseover="document.getElementById('orphyCard').style.display = 'block'" onMouseout="document.getElementById('orphyCard').style.display = 'none'";>
+      <img src="https://drive.google.com/uc?export=view&id=1nwgLsVCKJ-9r2CTmRjxcJo-0WQ7mGhl6" alt="Orpheus" id="orphyPic"><br>
+      <b>Orpheus</b> <span id="orphyLink" class="watchlistLink"><a>+ add to watchlist</a></span>
+      <div id="orphyCard" class="cards" onMouseover="document.getElementById('orphyCard').style.display = 'block'" onMouseout="document.getElementById('orphyCard').style.display = 'none'";>
+        <b>Name:</b> Orpheus<br>
+        <b>Breed:</b> Dutch Warmblood<br>
+        <b>Age:</b> 14<br>
+        <b>Discipline:</b> Jumper<br>
+        <b>Jumping experience:</b> 1.10m - 1.20m<br>
+        <b>Suitable for:</b> Advanced Jr/Am, Intermediate Jr/Am<br>
+        <b>Price:</b> $25,000<br>
+        <b>Location:</b> Victoria, BC<br>
+        <b>Seller:</b> Canadian Equine Sales <a>Message</a><br>
+        <b>Phone number:</b> <span id="phone">(888) 888-8888</span> <span id="premium"><a>Upgrade to Premium!</a></span>
+      </div>
+    </div>
+    
+    <div id="dylan" onMouseover="document.getElementById('dylanCard').style.display = 'block'" onMouseout="document.getElementById('dylanCard').style.display = 'none'";>
+      <img src="https://drive.google.com/uc?export=view&id=1DDYNoyEJ1Q-nd591LmjJrz55UPcZanDW" alt="Date Night" id="dylanPic"><br>
+      <b>Date Night</b> <span id="dylanLink" class="watchlistLink"><a>+ add to watchlist</a></span>
+      <div id="dylanCard" class="cards" onmouseover="document.getElementById('dylanCard').style.display = 'block'" onmouseout="document.getElementById('dylanCard').style.display = 'none'";>
+        <b>Name:</b> Date Night "Dylan"<br>
+        <b>Breed:</b> Belgian Warmblood<br>
+        <b>Age:</b> 12<br>
+        <b>Discipline:</b> Hunter<br>
+        <b>Jumping experience:</b> 3'3" - 3'6"<br>
+        <b>Suitable for:</b> Professional, Advanced Jr/Am, Intermediate Jr/Am<br>
+        <b>Price:</b> $50,000<br>
+        <b>Location:</b> Washington, DC<br>
+        <b>Seller:</b> Erica B. <a>Message</a><br>
+        <b>Phone number:</b> <span id="phone">(888) 888-8888</span> <span id="premium"><a>Upgrade to Premium!</a></span>
+      </div>
+    </div>
+    
+     <div id="bella" onMouseover="document.getElementById('bellaCard').style.display = 'block'" onMouseout="document.getElementById('bellaCard').style.display = 'none'";>
+      <img src="https://drive.google.com/uc?export=view&id=1TIvvOJH5kR-KnsJL9AucYy25Wo9CWHKP" alt="Bella" id="bellaPic"><br>
+      <b>Bella Rose</b> <span id="bellaLink" class="watchlistLink"><a>+ add to watchlist</a></span>
+      <div id="bellaCard" class="cards" onMouseover="document.getElementById('bellaCard').style.display = 'block'" onMouseout="document.getElementById('bellaCard').style.display = 'none'";>
+        <b>Name:</b> Bella Rose "Bella"<br>
+        <b>Breed:</b> Selle Francais<br>
+        <b>Age:</b> 16<br>
+        <b>Discipline:</b> Hunter</br>
+        <b>Jumping experience:</b> 2'6" - 2'9"<br>
+        <b>Suitable for:</b> Intermediate Jr/Am, Novice Jr/Am<br>
+        <b>Price:</b> $6,000<br>
+        <b>Location:</b> Nice, France<br>
+        <b>Seller:</b> Euro Sales LLC <a>Message</a><br>
+        <b>Phone number:</b> <span id="phone">(888) 888-8888</span> <span id="premium"><a>Upgrade to Premium!</a></span>
+      </div>
+    </div>
+    
+    <div id="frank" onMouseover="document.getElementById('frankCard').style.display = 'block'" onMouseout="document.getElementById('frankCard').style.display = 'none'";>
+      <img src="https://drive.google.com/uc?export=view&id=1VOtajqvCGVwc6rKuB684aynqF_P2la0l" alt="Stutterfly" id="frankPic"><br>
+      <b>Stutterfly</b> <span id="frankLink" class="watchlistLink"><a>+ add to watchlist</a></span>
+      <div id="frankCard" class="cards" onMouseover="document.getElementById('frankCard').style.display = 'block'" onMouseout="document.getElementById('frankCard').style.display = 'none'";>
+        <b>Name:</b> Stutterfly "Frankie"<br>
+        <b>Breed:</b> Canadian Sporthorse<br>
+        <b>Age:</b> 18<br>
+        <b>Discipline:</b> Hunter<br>
+        <b>Jumping experience:</b> 3' - 3'3"<br>
+        <b>Suitable for:</b> Advanced Jr/Am, Intermediate Jr/Am, Novice Jr/Am<br>
+        <b>Price:</b> $999,999,999<br>
+        <b>Location:</b> Charlottesville, VA<br>
+        <b>Seller:</b> Maya S. <a>Message</a><br>
+        <b>Phone number:</b> <span id="phone">(888) 888-8888</span> <span id="premium"><a>Upgrade to Premium!</a></span>
+</div>
+    </div>
+  </div>
+</div>
+</div>
+</body>
+
+<footer>
+  <p><label for "email" id="emailLabel">Sign up for our newsletter!</label><br>
+    <input type="text" id="email" name="email" placeholder="Your E-mail Address"><button id="newsletter">Sign Up</button><br>
+    <span id="valid">Thank you for signing up to our newsletter!</span> <span id="invalid">Please enter a valid email address.</span>
+    </p>
+  <a>Home</a>
+  <a>Account</a>
+  <a>About us</a>
+  <a>Careers</a>
+  <a>Site map</a>
+  <a>Contact us</a>
+  <a>Terms of Service</a>
+  <a>Privacy Policy</a><br>
+  
+</footer>
+  <script  src="./script.js"></script>
+</html>
